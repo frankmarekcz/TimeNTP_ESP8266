@@ -152,24 +152,38 @@ void loop()
     if (now() != prevDisplay) { //update the display only if time has changed
       prevDisplay = now();
 
-      /*
-            if (int(year()) == 2022) { //                2022  27. březen  30. říjen
-              if ( (int(month()) >= 3 && int(day()) >= 27 && int(hour()) >= 2) && (int(month()) <= 10 && int(day()) <= 30 && int(hour()) <= 2 )) {
-                //offset = 1;
-              }
-              else  {
-                offset = 0;
-              }
-            }// end 2022
-                         2023  26. březen  29. říjen
-                       2024  31. březen  27. říjen
-                       2025  30. březen  26. říjen
-                       2026  29. březen  25. říjen
-                       2027  28. březen  31. říjen
-                       2028  26. březen  29. říjen
-                       2029  25. březen  28. říjen
-                       2030  31. březen  27. říjen
-      */
+     if (int(year()) == 2018) {
+        if ( int(month()) >= 3 && int(day()) >= 25 && int(hour()) >= 2) {
+          offset = 1;
+        }
+        if ( int(month()) >= 10 && int(day()) >= 28 && int(hour()) >= 2) {
+          offset = 0;
+        }
+      }
+      if (int(year()) == 2019) {
+        if ( int(month()) >= 3 && int(day()) >= 31 && int(hour()) >= 2) {
+          offset = 1;
+        }
+        if ( int(month()) >= 10 && int(day()) >= 27 && int(hour()) >= 2) {
+          offset = 0;
+        }
+      }
+      if (int(year()) == 2020) {
+        if ( int(month()) >= 3 && int(day()) >= 29 && int(hour()) >= 2) {
+          offset = 1;
+        }
+        if ( int(month()) >= 10 && int(day()) >= 25 && int(hour()) >= 2) {
+          offset = 0;
+        }
+      }
+      if (int(year()) == 2022) {
+        if ( int(month()) >= 3 && int(day()) >= 27 && int(hour()) >= 2) {
+          offset = 1;
+        }
+        if ( int(month()) >= 10 && int(day()) >= 30 && int(hour()) >= 2) {
+          offset = 0;
+        }
+      }
       ihour = int(hour()) + offset;
       if (int(ihour) == 24)
         ihour = 0;

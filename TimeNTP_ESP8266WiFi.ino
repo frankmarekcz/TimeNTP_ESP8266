@@ -225,22 +225,40 @@ void digitalClockDisplay() {
   Serial.println(year());
 
 
-  select (int(int(ihour) / 10), 1);
-  select ((int(ihour)) - int((int(ihour)) / 10) * 10, 5);
-  if (second() % 2) {
-    lcd.setCursor(9, 0);
-    lcd.write(6);
-    lcd.setCursor(9, 1);
-    lcd.write(6);
+    if (second() % 20 || second() % 21 || second() % 22 ) {
+    select (int(int(ihour) / 10), 1);
+    select ((int(ihour)) - int((int(ihour)) / 10) * 10, 5);
+    select (int(minute() / 10), 11);
+    select (minute() - int(minute() / 10) * 10, 15);
+    if (second() % 2) {
+      lcd.setCursor(9, 0);
+      lcd.write(6);
+      lcd.setCursor(9, 1);
+      lcd.write(6);
+    } else {
+      lcd.setCursor(9, 0);
+      lcd.print(" ");
+      lcd.setCursor(9, 1);
+      lcd.print(" ");
+    }
   } else {
-    lcd.setCursor(9, 0);
-    lcd.print(" ");
-    lcd.setCursor(9, 1);
-    lcd.print(" ");
-
+    select (int(int(day()) / 10), 1);
+    select ((int(day())) - int((int(day())) / 10) * 10, 5);
+    select (int(month() / 10), 11);
+    select (month() - int(month() / 10) * 10, 15);
+    if (second() % 2) {
+      lcd.setCursor(9, 2);
+      lcd.write(6);
+      lcd.setCursor(19, 2);
+      lcd.write(6);
+    } else {
+      lcd.setCursor(9, 2);
+      lcd.print(" ");
+      lcd.setCursor(19, 2);
+      lcd.print(" ");
+    }
   }
-  select (int(minute() / 10), 11);
-  select (minute() - int(minute() / 10) * 10, 15);
+
 }
 void printDigits(int digits) {
   if (digits < 10)

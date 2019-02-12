@@ -11,6 +11,9 @@
 #include <WiFiUdp.h>
 #include <Timezone.h>
 #include <TimeLib.h>
+#include <ArduinoOTA.h>
+MDNSResponder mdns;
+
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 byte a[8] = {
@@ -140,6 +143,7 @@ void setup()
   lcd.print(Udp.localPort());
   lcd.setCursor(0, 3);
   lcd.print("waiting for sync");
+  startOta();
   delay(3000);
   lcd.clear();
   setSyncProvider(getNtpTime);
@@ -148,6 +152,7 @@ time_t prevDisplay = 0; // when the digital clock was displayed
 
 void loop()
 {
+    ArduinoOTA.handle();
   if (timeStatus() != timeNotSet) {
     if (now() != prevDisplay) { //update the display only if time has changed
       prevDisplay = now();

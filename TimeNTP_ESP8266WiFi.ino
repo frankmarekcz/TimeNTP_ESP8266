@@ -1,11 +1,8 @@
 #include <ESP8266WiFi.h>
-
 #include <WiFiUdp.h>
 #include <Timezone.h>
 #include <TimeLib.h>
 #include <ArduinoOTA.h>
-//MDNSResponder mdns;
-
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 byte a[8] = {

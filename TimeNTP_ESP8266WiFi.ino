@@ -1,18 +1,10 @@
 #include <ESP8266WiFi.h>
-#include <ESP8266WiFiAP.h>
-#include <ESP8266WiFiGeneric.h>
-#include <ESP8266WiFiMulti.h>
-#include <ESP8266WiFiScan.h>
-#include <ESP8266WiFiSTA.h>
-#include <ESP8266WiFiType.h>
-#include <WiFiClient.h>
-#include <WiFiClientSecure.h>
-#include <WiFiServer.h>
+
 #include <WiFiUdp.h>
 #include <Timezone.h>
 #include <TimeLib.h>
 #include <ArduinoOTA.h>
-MDNSResponder mdns;
+//MDNSResponder mdns;
 
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 20, 4);
@@ -152,12 +144,12 @@ time_t prevDisplay = 0; // when the digital clock was displayed
 
 void loop()
 {
-    ArduinoOTA.handle();
+  ArduinoOTA.handle();
   if (timeStatus() != timeNotSet) {
     if (now() != prevDisplay) { //update the display only if time has changed
       prevDisplay = now();
 
-     if (int(year()) == 2018) {
+      if (int(year()) == 2018) {
         if ( int(month()) >= 3 && int(day()) >= 25 && int(hour()) >= 2) {
           offset = 1;
         }
@@ -229,8 +221,7 @@ void digitalClockDisplay() {
   Serial.print(".");
   Serial.println(year());
 
-
-    if (second() % 20 || second() % 21 || second() % 22 ) {
+  if (second() % 20 || second() % 21 || second() % 22 ) {
     select (int(int(ihour) / 10), 1);
     select ((int(ihour)) - int((int(ihour)) / 10) * 10, 5);
     select (int(minute() / 10), 11);
@@ -263,7 +254,6 @@ void digitalClockDisplay() {
       lcd.print(" ");
     }
   }
-
 }
 void printDigits(int digits) {
   if (digits < 10)
@@ -335,8 +325,8 @@ time_t getNtpTime()
       TimeChangeRule *tcr;
       time_t utc;
       utc = epoch;
-      //+          printTime(CE.toLocal(utc, &tcr), tcr -> abbrev, "Bratislava");
-      //      return secsSince1900 - 2208988800UL + timeZone * SECS_PER_HOUR;
+      //         printTime(CE.toLocal(utc, &tcr), tcr -> abbrev, "Bratislava");
+      return secsSince1900 - 2208988800UL + timeZone * SECS_PER_HOUR;
       return seventyYears + utc;
     }
   }
